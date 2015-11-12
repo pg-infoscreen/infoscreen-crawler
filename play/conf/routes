@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Management website
+GET     /                           controllers.Manager.main()
+GET     /api                        controllers.Manager.api()
+
+# REST API
+
+#GET     /xkcd                       controllers.XkcdController.getAll()
+GET     /xkcd/random                controllers.XkcdController.random()
+GET     /xkcd/:id                   controllers.XkcdController.get(id : Long)
+
+GET     /rss/:name                  controllers.RSSController.rss(name:String)
+
+
+GET     /:file                      controllers.StaticJsonController.get(file : String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

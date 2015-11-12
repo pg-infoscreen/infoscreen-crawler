@@ -1,0 +1,32 @@
+@import controllers.Manager.APIDescription
+@(crawlers:List[APIDescription])
+
+<div id="content">
+
+<div style="position: fixed; right: 20px; top: 20px; border: solid black 1px; background-color: yellow;">Für Beispiele mit dem Mauszeiger auf dem Namen hovern.</br>(Funktioniert sofern vorhanden)</div>
+
+@for(p <- crawlers) {
+  <h2><a @if(!p.getExample().isEmpty){onmouseover="document.getElementById('@p.getName()').style.visibility='visible';" onmouseout="document.getElementById('@p.getName()').style.visibility='hidden';" }>@p.getName()</a> [<a href="@p.getURL()">@p.getURL()</a>] 
+  </h2>
+  @p.getDescription() 
+  @if(!p.getExample().isEmpty){
+  <div id="@p.getName()" style="padding-right: 10px; background-color: lightgray; border: solid 1px black; visibility: hidden;position: fixed; top:20px;right:20px"><b>Beispiel für @p.getName():</b><pre><code>@p.getExample()</code></pre></div>
+  }
+  
+  
+  @if(p.getSubDescriptions.isEmpty) {
+} else {
+  <ul>
+@for(q <- p.getSubDescriptions) {
+  <li><b>@q.getName() [<a href="@q.getURL()">@q.getURL()</a>]</b></br>@q.getDescription()</li>
+}
+</ul>
+
+}
+  
+
+}
+
+
+
+</div>
